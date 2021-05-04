@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd server && babel-node index.js --exec babel-node --presets es2015",
-    "dev": "cd server && nodemon index.js --exec babel-node babel-node --presets es2015",
-    "migrate": "cd server && babel-node database/tables.js --exec babel-node --presets es2015"
+    "dev": "cd server && set NODE_ENV=dev && nodemon index.js --exec babel-node babel-node --presets es2015",
+    "migrate": "cd server && set NODE_ENV=dev && babel-node database/tables.js --exec babel-node --presets es2015"
   },
   "repository": {
     "type": "git",
