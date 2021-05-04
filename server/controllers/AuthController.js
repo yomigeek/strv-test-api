@@ -59,9 +59,7 @@ class AuthController {
               expiryTime: "500h",
             };
             const token = Token.generateToken(tokenData);
-            return MessagesHandler.successMessage(res, 200, "Login success", {
-              token,
-            });
+            return MessagesHandler.successMessage(res, 200, "Login success");
             // return res.status(200).json({
             //   status: "success",
             //   statusCode: 200,
