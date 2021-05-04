@@ -2,7 +2,7 @@ import connect from "../database/connect";
 import {v4 as uuidv4} from "uuid";
 import bcrypt from "bcryptjs";
 import Token from "./../utils/Token";
-import ErrorMessages from './../utils/ErrorMessages';
+import MessagesHandler from "./../utils/MessagesHandler";
 
 class AuthController {
   static userSignUp(req, res) {
@@ -15,13 +15,12 @@ class AuthController {
         VALUES ('${userId}', '${email}', '${hashedPassword}')
       `,
       (err, response) => {
-
         if (err) {
-          return res.status(500).json({
-            status: "error",
-            statusCode: 500,
-            message: "fail",
-          });
+          return MessagesHandler.errorMessage(
+            res,
+            500,
+            "failure to perform operation"
+          );
         }
 
         const result = JSON.parse(JSON.stringify(response.rows));
@@ -33,11 +32,7 @@ class AuthController {
             message: "signup successful",
           });
         } else {
-          return res.status(400).json({
-            status: "error",
-            statusCode: 400,
-            message: "fail",
-          });
+          return MessagesHandler.errorMessage(res, 400, "Signup failed");
         }
       }
     );
@@ -49,7 +44,6 @@ class AuthController {
     connect.query(
       `SELECT * FROM users WHERE email = '${email}'`,
       (err, response) => {
-
         const result = JSON.parse(JSON.stringify(response.rows));
 
         if (result.length > 0) {
@@ -65,25 +59,28 @@ class AuthController {
               expiryTime: "500h",
             };
             const token = Token.generateToken(tokenData);
-            return res.status(200).json({
-              status: "success",
-              statusCode: 200,
-              message: "login successful",
+            return MessagesHandler.successMessage(res, 200, "Login success", {
               token,
             });
+            // return res.status(200).json({
+            //   status: "success",
+            //   statusCode: 200,
+            //   message: "login successful",
+            //   token,
+            // });
           } else {
-            return res.status(400).json({
-              status: "error",
-              statusCode: 400,
-              message: "Email or Password is wrong",
-            });
+            return MessagesHandler.errorMessage(
+              res,
+              400,
+              "Email or password is wrong"
+            );
           }
         } else {
-          return res.status(400).json({
-            status: "error",
-            statusCode: 400,
-            message: "Email or Password is wrong",
-          });
+          return MessagesHandler.errorMessage(
+            res,
+            400,
+            "Email or password is wrong"
+          );
         }
       }
     );
