@@ -21,6 +21,7 @@ const createTable = () => {
     if (err) {
       return err.message;
     }
+    console.log("Migration completed")
     connect.end();
   });
 };
