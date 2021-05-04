@@ -12,7 +12,7 @@ class MessagesHandler {
       status: 'success',
       statusCode,
       message,
-      ...data
+      data
     });
   }
 }
