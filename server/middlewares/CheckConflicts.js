@@ -1,14 +1,19 @@
 import connect from "../database/connect";
+import ErrorMessages from "./../utils/ErrorMessages";
 
 class CheckConflicts {
   static validateUserDetail(req, res, next) {
     const {password, email} = req.body;
 
     if (!password || !email) {
-      return res.status(400).json({
-        status: "error",
-        message: "Email and password are required",
-      });
+      return ErrorMessages.errorMessage400(
+        res,
+        "Email and password are required"
+      );
+      // return res.status(400).json({
+      //   status: "error",
+      //   message: "Email and password are required",
+      // });
     }
     if (password.length < 6) {
       return res.status(400).json({

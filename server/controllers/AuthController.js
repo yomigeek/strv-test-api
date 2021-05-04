@@ -1,7 +1,8 @@
 import connect from "../database/connect";
 import {v4 as uuidv4} from "uuid";
 import bcrypt from "bcryptjs";
-import Token from './../utils/Token';
+import Token from "./../utils/Token";
+import ErrorMessages from './../utils/ErrorMessages';
 
 class AuthController {
   static userSignUp(req, res) {
@@ -14,10 +15,16 @@ class AuthController {
         VALUES ('${userId}', '${email}', '${hashedPassword}')
       `,
       (err, response) => {
-        console.log(err, "err");
-        console.log(response, "result");
+
+        if (err) {
+          return res.status(500).json({
+            status: "error",
+            statusCode: 500,
+            message: "fail",
+          });
+        }
+
         const result = JSON.parse(JSON.stringify(response.rows));
-        console.log(result, "result");
 
         if (result) {
           return res.status(201).json({
@@ -34,9 +41,7 @@ class AuthController {
         }
       }
     );
-   
-  };
-
+  }
 
   static userLogin(req, res) {
     const {email, password} = req.body;
@@ -44,10 +49,8 @@ class AuthController {
     connect.query(
       `SELECT * FROM users WHERE email = '${email}'`,
       (err, response) => {
-        console.log(err, "err");
-        console.log(response, "result");
+
         const result = JSON.parse(JSON.stringify(response.rows));
-        console.log(result, "result");
 
         if (result.length > 0) {
           const checkPassword = bcrypt.compareSync(
@@ -55,11 +58,11 @@ class AuthController {
             result[0].password
           );
 
-          if(checkPassword) {            
+          if (checkPassword) {
             const tokenData = {
               email,
               userId: result[0].userid,
-              expiryTime: "500h"
+              expiryTime: "500h",
             };
             const token = Token.generateToken(tokenData);
             return res.status(200).json({
@@ -75,7 +78,6 @@ class AuthController {
               message: "Email or Password is wrong",
             });
           }
-        
         } else {
           return res.status(400).json({
             status: "error",
