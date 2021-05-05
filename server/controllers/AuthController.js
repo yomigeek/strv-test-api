@@ -26,10 +26,14 @@ class AuthController {
         const result = JSON.parse(JSON.stringify(response.rows));
 
         if (result) {
-          return res.status(201).json({
-            status: "success",
-            statusCode: 201,
-            message: "signup successful",
+          const tokenData = {
+            email,
+            userId,
+            expiryTime: "500h",
+          };
+          const token = Token.generateToken(tokenData);
+          return MessagesHandler.successMessage(res, 201, "Signup successful", {
+            token,
           });
         } else {
           return MessagesHandler.errorMessage(res, 400, "Signup failed");
