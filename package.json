@@ -4,7 +4,7 @@
   "description": "node app",
   "main": "app.js",
   "scripts": {
-    "test": "cd server && set NODE_ENV=test && npm run migrate &&nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register test/ --exit",
+    "test": "cd server && set NODE_ENV=test && npm run migrate && nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register test/ --exit",
     "start": "cd server && babel-node index.js --exec babel-node --presets es2015",
     "dev": "cd server && nodemon index.js --exec babel-node babel-node --presets es2015",
     "migrate": "cd server && babel-node database/tables.js --exec babel-node --presets es2015",
@@ -36,6 +36,7 @@
     "express": "^4.17.1",
     "firebase": "^8.4.3",
     "firebase-functions": "^3.13.2",
+    "istanbul": "^0.4.5",
     "jsonwebtoken": "^8.5.1",
     "mocha": "^8.3.2",
     "nodemon": "^2.0.7",
