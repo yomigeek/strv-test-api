@@ -1,5 +1,6 @@
 import connect from "../database/connect";
 import MessagesHandler from "./../utils/MessagesHandler";
+import Validator from "validatorjs";
 
 class CheckConflicts {
   static validateUserDetail(req, res, next) {
@@ -64,6 +65,37 @@ class CheckConflicts {
         next();
       }
     );
+  }
+
+  static validateContactData(req, res, next) {
+    const {firstName, lastName, phone, address} = req.body;
+
+    let data = {
+      firstname: firstName,
+      lastname: lastName,
+      phone,
+      address,
+    };
+
+    let rules = {
+      firstname: "required|alpha|min:2",
+      lastname: "required|alpha|min:2",
+      phone: "required|min:11|max:15",
+      address: "required|min:5",
+    };
+
+    let validation = new Validator(data, rules);
+
+    if (validation.fails()) {
+      return MessagesHandler.errorMessage(
+        res,
+        400,
+        "Validation failed",
+        validation.errors.all()
+      );
+    } else {
+      next();
+    }
   }
 }
 

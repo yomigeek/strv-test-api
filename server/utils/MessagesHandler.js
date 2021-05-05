@@ -1,9 +1,10 @@
 class MessagesHandler {
-  static errorMessage(res, statusCode, message) {
+  static errorMessage(res, statusCode, message, errors) {
     return res.status(statusCode).json({
       status: 'error',
       statusCode,
       message,
+      errors
     });
   }
 

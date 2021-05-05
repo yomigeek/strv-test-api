@@ -1,6 +1,6 @@
 import {Router} from "express";
 import CheckConflicts from "./../middlewares/CheckConflicts";
-import Token from './../utils/Token';
+import Token from "./../utils/Token";
 import ContactController from "./../controllers/ContactController";
 
 const contactRouter = Router();
@@ -8,7 +8,7 @@ const contactRouter = Router();
 contactRouter.post(
   "/add",
   Token.verifyToken,
-  // CheckConflicts.validateLoginDetail,
+  CheckConflicts.validateContactData,
   ContactController.addContact
 );
 
