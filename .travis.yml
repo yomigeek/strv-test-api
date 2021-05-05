@@ -19,7 +19,7 @@ before_script:
   - ./cc-test-reporter before-build
 script:
   - npm test
-  - nyc --reporter=lcov yarn run test
+  - nyc --reporter=lcov npm test
 
 after_success:
   - npm run coveralls
