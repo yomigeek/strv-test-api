@@ -2,6 +2,7 @@ import {Pool} from "pg";
 require("dotenv").config({path: "../.env"});
 
 const mydatabase = process.env.DATABASE_URL;
+const testDatabase = process.env.TEST_DB_URL;
 
 const localConnection = {
   user: process.env.DB_USER,
@@ -16,12 +17,18 @@ const productionConnection = {
   ssl: {rejectUnauthorized: false},
 };
 
+const testConnection = {
+  connectionString: testDatabase,
+};
+
 let connectString = localConnection;
 
 var env = (process.env.NODE_ENV || "dev").trim();
 
 if (env === "dev") {
   connectString = localConnection;
+} else if (env === "test") {
+  connectString = testConnection;
 } else {
   connectString = productionConnection;
 }

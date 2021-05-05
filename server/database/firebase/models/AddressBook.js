@@ -1,6 +1,8 @@
 import firebase from "../index";
 
-const db = firebase.ref("/addressbook");
+require("dotenv").config({path: "../.env"});
+
+const db = firebase.ref(`/${process.env.FBASE_DB_NAME}`);
 
 class AddressBook {
   create(contact) {
