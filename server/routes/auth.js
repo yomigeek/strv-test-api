@@ -1,21 +1,21 @@
-import { Router } from "express";
+import {Router} from "express";
 import AuthController from "../controllers/AuthController";
-import CheckConflicts from './../middlewares/CheckConflicts';
+import CheckConflicts from "./../middlewares/CheckConflicts";
+import AuthValidation from "./../middlewares/validations/AuthValidation";
 
 const authRouter = Router();
 
 authRouter.post(
   "/login",
-  CheckConflicts.validateLoginDetail,
+  AuthValidation.validateUserDetail,
   AuthController.userLogin
 );
 
 authRouter.post(
-    "/signup",
-    CheckConflicts.validateUserDetail,
-    CheckConflicts.existingUser,
-    AuthController.userSignUp
-  );
-
+  "/signup",
+  AuthValidation.validateUserDetail,
+  CheckConflicts.existingUser,
+  AuthController.userSignUp
+);
 
 export default authRouter;
