@@ -1,15 +1,17 @@
 import * as firebase from "firebase";
 import "firebase/database";
 
+require("dotenv").config({path: "../.env"});
+
 let config = {
-    apiKey: "AIzaSyDlDez7e7MjgWLoB217zZZcmRcmfA5bFPc",
-    authDomain: "strv-addressbook-olaoye-yomi.firebaseapp.com",
-    databaseURL: "https://strv-addressbook-olaoye-yomi-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "strv-addressbook-olaoye-yomi",
-    storageBucket: "strv-addressbook-olaoye-yomi.appspot.com",
-    messagingSenderId: "423464213551",
-    appId: "1:423464213551:web:b5f92db022d2dddca1fada",
-    measurementId: "G-4Y5864LJGE"
+  apiKey: process.env.FBASE_API_KEY,
+  authDomain: process.env.FBASE_AUTH_DOMAIN,
+  databaseURL: process.env.FBASE_DB_URL,
+  projectId: process.env.FBASE_PROJECT_ID,
+  storageBucket: process.env.FBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FBASE_APP_ID,
+  measurementId: process.env.FBASE_MID,
 };
 
 firebase.initializeApp(config);

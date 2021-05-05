@@ -22,7 +22,6 @@ class Token {
   static verifyToken(req, res, next) {
     const token = req.body.token || req.headers["x-access-token"];
     if (token) {
-      console.log(process.env.SECRET, 'token')
       jwt.verify(token, process.env.SECRET, (error, decoded) => {
         if (error) {
           return MessagesHandler.errorMessage(res, 401, "Unauthorized. Login first");
