@@ -1,16 +1,18 @@
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
+import MessagesHandler from "./MessagesHandler";
 
-dotenv.config();
+require('dotenv').config({path: '../.env'});
 
 class Token {
   /**
    * @description Method to generate token
    *
-   * @param {Object} user
+   * @param {Object} tokenData
    *
    * @return {String} Returned token
    */
+
+  
   static generateToken(tokenData) {
     return jwt.sign(tokenData, process.env.SECRET, {
       expiresIn: tokenData.expiryTime,
@@ -20,21 +22,16 @@ class Token {
   static verifyToken(req, res, next) {
     const token = req.body.token || req.headers["x-access-token"];
     if (token) {
+      console.log(process.env.SECRET, 'token')
       jwt.verify(token, process.env.SECRET, (error, decoded) => {
         if (error) {
-          return res.status(401).send({
-            status: "unauthorized",
-            statusCode: 401,
-          });
+          return MessagesHandler.errorMessage(res, 401, "Unauthorized. Login first");
         }
         req.decoded = decoded;
         return next();
       });
     } else {
-      return res.status(401).send({
-        status: "unauthorized",
-        statusCode: 401,
-      })
+      return MessagesHandler.errorMessage(res, 401, "Unauthorized. Login first");
     }
   }
 }
