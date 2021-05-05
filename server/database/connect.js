@@ -18,6 +18,7 @@ const productionConnection = {
 
 let connectString = localConnection;
  
+console.log(process.env, process.env.NODE_ENV, 'env')
 if(process.env.NODE_ENV.trim() === "dev") {
   connectString = localConnection;
 } else {
