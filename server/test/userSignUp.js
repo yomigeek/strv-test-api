@@ -1,9 +1,7 @@
-import {describe, it, before, after} from "mocha";
-import chai, {expect} from "chai";
+import {describe, it} from "mocha";
+import chai from "chai";
 import chaiHttp from "chai-http";
 import app from "../index";
-
-const should = chai.should();
 
 chai.use(chaiHttp);
 
