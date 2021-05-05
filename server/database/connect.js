@@ -1,5 +1,5 @@
 import {Pool} from "pg";
-require('dotenv').config({path: '../.env'});
+require("dotenv").config({path: "../.env"});
 
 const mydatabase = process.env.DATABASE_URL;
 
@@ -17,19 +17,21 @@ const productionConnection = {
 };
 
 let connectString = localConnection;
- 
-console.log(process.env, process.env.NODE_ENV, 'env')
-if(process.env.NODE_ENV.trim() === "dev") {
+
+var env = (process.env.NODE_ENV || "dev").trim();
+
+if (env === "dev") {
   connectString = localConnection;
 } else {
-  connectString = productionConnection; 
+  connectString = productionConnection;
 }
+
+console.log(connectString, "env");
 
 const connect = new Pool(connectString);
 
 connect.on("error", (err, client) => {
   console.error("Error:", err);
 });
-
 
 export default connect;
