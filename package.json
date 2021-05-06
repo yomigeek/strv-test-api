@@ -1,5 +1,6 @@
 {
   "name": "strv-test-api",
+  "type": "module",
   "version": "1.0.0",
   "description": "node app",
   "main": "app.js",
