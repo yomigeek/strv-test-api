@@ -37,12 +37,10 @@ describe("User Add Contact API Tests", () => {
       .post("/api/v1/contact/add")
       .set("x-access-token", token)
       .send({
-        email: "yomi@example.com",
-        password: "12345678",
         firstName: "yom",
         lastName: "ola",
-        phone: "1234567",
-        address: "Lagos",
+        phone: "123456709089",
+        address: "Lagos, nigeria",
       })
       .end((err, res) => {
         res.should.have.status(201);
