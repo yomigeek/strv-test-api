@@ -1,4 +1,4 @@
-import connect from "./connect";
+const connect = require("./connect");
 
 connect.query(
   ` CREATE TABLE IF NOT EXISTS users (
