@@ -1,12 +1,13 @@
-// import app from "../index";
+import {describe, it} from "mocha";
+import chai from "chai";
+import chaiHttp from "chai-http";
+import app from "../index";
 
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let app = require('../index');
-let should = chai.should();
+const should = chai.should();
 
 chai.use(chaiHttp);
 
+// Test user signup API/functions
 describe("User SignUp API Tests", () => {
   it("should signup a user account on /api/v1/auth/signup POST", (done) => {
     chai
