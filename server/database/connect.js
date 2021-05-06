@@ -33,8 +33,6 @@ if (env === "dev") {
   connectString = productionConnection;
 }
 
-console.log(connectString, "env");
-
 const connect = new Pool(connectString);
 
 connect.on("error", (err, client) => {

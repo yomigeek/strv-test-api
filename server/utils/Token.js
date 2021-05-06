@@ -14,7 +14,6 @@ class Token {
 
   
   static generateToken(tokenData) {
-    console.log(tokenData, process.env.PORT, process.env.SECRET, 'tok view')
     return jwt.sign(tokenData, process.env.SECRET, {
       expiresIn: tokenData.expiryTime,
     });
