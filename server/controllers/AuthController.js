@@ -76,7 +76,7 @@ class AuthController {
         } else {
           return MessagesHandler.errorMessage(
             res,
-            400,
+            403,
             "Email or password is wrong"
           );
         }
