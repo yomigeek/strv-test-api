@@ -1,8 +1,9 @@
 import firebase from "../index";
+import collection from "./connectCollection";
 
 require("dotenv").config({path: "../.env"});
 
-const db = firebase.ref(`/${process.env.FBASE_DB_NAME}`);
+const db = firebase.ref(`/${collection}`);
 
 class AddressBook {
   create(contact) {

@@ -25,6 +25,8 @@ let connectString = localConnection;
 
 var env = (process.env.NODE_ENV || "dev").trim();
 
+console.log(process.env.NODE_ENV, 'env')
+
 if (env === "dev") {
   connectString = localConnection;
 } else if (env === "test") {
