@@ -5,7 +5,6 @@ import app from "../index";
 
 chai.use(chaiHttp);
 
-// Test user signup API/functions
 describe("User SignUp API Tests", () => {
   it("should signup a user account on /api/v1/auth/signup POST", (done) => {
     chai
