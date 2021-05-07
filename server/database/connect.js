@@ -1,4 +1,5 @@
 import {Pool} from "pg";
+
 require("dotenv").config({path: "../.env"});
 
 const mydatabase = process.env.DATABASE_URL;
@@ -23,9 +24,7 @@ const testConnection = {
 
 let connectString = localConnection;
 
-var env = (process.env.NODE_ENV || "dev").trim();
-
-console.log(process.env.NODE_ENV, 'env')
+const env = (process.env.NODE_ENV || "dev").trim();
 
 if (env === "dev") {
   connectString = localConnection;
