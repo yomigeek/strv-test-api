@@ -31,7 +31,7 @@ describe("User Add Contact API Tests", () => {
         done();
       });
   });
-  it("should signup a user account on /api/v1/contact/add POST", (done) => {
+  it("should add a contact for a logged-in user on /api/v1/contact/add POST", (done) => {
     chai
       .request(app)
       .post("/api/v1/contact/add")
