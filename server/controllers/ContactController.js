@@ -20,7 +20,6 @@ class ContactController {
         );
       })
       .catch((e) => {
-        console.log(e, "error");
         return MessagesHandler.errorMessage(
           res,
           500,
