@@ -1,7 +1,6 @@
 # STRV OLAOYE YOMI API
 An Address book contact API
 [![Build Status](https://travis-ci.com/yomigeek/strv-test-api.svg?branch=develop)](https://travis-ci.com/yomigeek/strv-test-api)
-[![Coverage Status](https://coveralls.io/repos/github/yomigeek/strv-test-api/badge.svg?branch=develop)](https://coveralls.io/github/yomigeek/strv-test-api?branch=develop)
 
 ### Hosted Url
 - Heroku hosted link: https://strv-test-api.herokuapp.com/api/v1
@@ -18,7 +17,8 @@ An Address book contact API
 - Node
 - Express
 - PostgreSQL
-
+- Google Firebase
+- Javascript
 
 ### Installation
 * Create a folder on your computer and navigate to the folder using your terminal
